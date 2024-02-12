@@ -1,0 +1,14 @@
+{
+  "id": "SearchPage",
+  "permalink": "/search",
+  "layout": "default",
+  "title": "Search",
+  "components": [
+    {
+      "id": "Search",
+      "sectionIdx": 1,
+      "props": {}
+    }
+  ],
+  "indexable": ["title"]
+}

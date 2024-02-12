@@ -1,7 +1,8 @@
 import { RenderEngine } from "@isomerpages/isomer-components";
-import { schema } from "@/schema/schema";
+import { schema } from "@/schema/search/schema";
 import * as Config from "@/config";
 import sitemap from "@/sitemap.json";
+
 export default function Page() {
   const renderSchema = schema;
   return (
