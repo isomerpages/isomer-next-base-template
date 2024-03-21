@@ -1,6 +1,6 @@
 import { RenderEngine } from "@isomerpages/isomer-components";
-import * as Config from "@/config";
-import sitemap from "@/sitemap.json";
+import config from "@/data/config.json";
+import sitemap from "@/public/sitemap.json";
 import Link from "next/link";
 
 import type { GetStaticProps, GetStaticPaths } from "next";
@@ -47,12 +47,16 @@ export const getStaticProps = (async (context) => {
   if (permalink && permalink.length > 0 && typeof permalink !== "string") {
     const joinedPermalink = permalink.join("/");
 
-    const schema = (await import(`@/schema/${joinedPermalink}/schema`)).schema;
+    const schema = await import(`@/schema/${joinedPermalink}.json`).then(
+      (module) => module.default
+    );
 
     return { props: { schema } };
   }
 
-  const schema = (await import(`@/schema/schema`)).schema;
+  const schema = await import(`@/schema/index.json`).then(
+    (module) => module.default
+  );
   return { props: { schema } };
 }) satisfies GetStaticProps<{
   schema: any;
@@ -62,12 +66,12 @@ export default function Page({ schema }: any) {
   const renderSchema = schema;
   return (
     <RenderEngine
-      id={renderSchema.id}
-      layout={renderSchema.layout}
-      config={{ navbar: Config.Navbar, footer: Config.Footer }}
-      sitemap={sitemap}
-      permalink={renderSchema.permalink}
-      components={renderSchema.components}
+      site={{
+        ...config.site,
+        isStaging: process.env.ISOMER_NEXT_ENVIRONMENT === "staging",
+      }}
+      page={renderSchema.page}
+      content={renderSchema.content}
       LinkComponent={Link}
     />
   );
