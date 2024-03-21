@@ -3,7 +3,7 @@
     "siteName": "Isomer Website",
     "agencyName": "Open Government Products",
     "theme": "next",
-    "logoUrl": "/images/isomer-logo.png",
+    "logoUrl": "/images/isomer-logo.svg",
     "isGovernment": true
   },
   "colors": {

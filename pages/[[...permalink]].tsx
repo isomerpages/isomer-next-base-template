@@ -1,5 +1,7 @@
 import { RenderEngine } from "@isomerpages/isomer-components";
 import config from "@/data/config.json";
+import navbar from "@/data/navbar.json";
+import footer from "@/data/footer.json";
 import sitemap from "@/public/sitemap.json";
 import Link from "next/link";
 
@@ -29,7 +31,6 @@ function extractPermalinks(sitemap: any) {
 
   // Start traversing from the root
   traverse(sitemap);
-  console.log(`result`, JSON.stringify(result));
   return result;
 }
 
@@ -41,7 +42,6 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (async (context) => {
-  console.log(`context`, context);
   const permalink = context.params?.permalink;
 
   if (permalink && permalink.length > 0 && typeof permalink !== "string") {
@@ -68,7 +68,11 @@ export default function Page({ schema }: any) {
     <RenderEngine
       site={{
         ...config.site,
-        isStaging: process.env.ISOMER_NEXT_ENVIRONMENT === "staging",
+        environment: process.env.ISOMER_NEXT_ENVIRONMENT,
+        siteMap: [],
+        navBarItems: navbar,
+        // @ts-expect-error blah
+        footerItems: footer,
       }}
       page={renderSchema.page}
       content={renderSchema.content}

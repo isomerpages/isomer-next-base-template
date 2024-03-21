@@ -1,10 +1,13 @@
+/** @type {import('tailwindcss').Config} */
 import siteConfig from "./data/config.json";
+import { NextPreset } from "@isomerpages/isomer-components";
 
 const config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@isomerpages/isomer-components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@isomerpages/isomer-components/**/*.{js,ts,jsx,tsx}",
   ],
+  presets: [NextPreset],
   theme: {
     extend: {
       colors: {
@@ -22,4 +25,5 @@ const config = {
     },
   },
 };
+
 export default config;
