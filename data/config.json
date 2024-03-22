@@ -1,9 +1,10 @@
 {
   "site": {
-    "siteName": "Isomer Website",
+    "siteName": "Isomer",
     "agencyName": "Open Government Products",
-    "theme": "next",
+    "theme": "isomer-next",
     "logoUrl": "/images/isomer-logo.svg",
+    "favicon": "/images/favicon-isomer.ico",
     "isGovernment": true
   },
   "colors": {

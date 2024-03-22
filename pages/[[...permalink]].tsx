@@ -1,8 +1,9 @@
-import { RenderEngine } from "@isomerpages/isomer-components";
+import { RenderEngine, RenderMetaHead } from "@isomerpages/isomer-components";
 import config from "@/data/config.json";
 import navbar from "@/data/navbar.json";
 import footer from "@/data/footer.json";
 import sitemap from "@/public/sitemap.json";
+import Head from "next/head";
 import Link from "next/link";
 
 import type { GetStaticProps, GetStaticPaths } from "next";
@@ -64,19 +65,30 @@ export const getStaticProps = (async (context) => {
 
 export default function Page({ schema }: any) {
   const renderSchema = schema;
+
   return (
-    <RenderEngine
-      site={{
-        ...config.site,
-        environment: process.env.ISOMER_NEXT_ENVIRONMENT,
-        siteMap: [],
-        navBarItems: navbar,
-        // @ts-expect-error blah
-        footerItems: footer,
-      }}
-      page={renderSchema.page}
-      content={renderSchema.content}
-      LinkComponent={Link}
-    />
+    <>
+      <Head>
+        <RenderMetaHead
+          // @ts-expect-error blah
+          site={config.site}
+          page={renderSchema.page}
+          LinkComponent={Link}
+        />
+      </Head>
+      <RenderEngine
+        site={{
+          ...config.site,
+          environment: process.env.NEXT_PUBLIC_ISOMER_NEXT_ENVIRONMENT,
+          siteMap: [],
+          navBarItems: navbar,
+          // @ts-expect-error blah
+          footerItems: footer,
+        }}
+        page={renderSchema.page}
+        content={renderSchema.content}
+        LinkComponent={Link}
+      />
+    </>
   );
 }
