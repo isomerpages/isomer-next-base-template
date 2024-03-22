@@ -68,14 +68,12 @@ export default function Page({ schema }: any) {
 
   return (
     <>
-      <Head>
-        <RenderMetaHead
-          // @ts-expect-error blah
-          site={config.site}
-          page={renderSchema.page}
-          LinkComponent={Link}
-        />
-      </Head>
+      <RenderMetaHead
+        // @ts-expect-error blah
+        site={config.site}
+        page={renderSchema.page}
+        HeadComponent={Head}
+      />
       <RenderEngine
         site={{
           ...config.site,
