@@ -1,4 +1,4 @@
-import { RenderEngine, RenderMetaHead } from "@isomerpages/isomer-components";
+import { RenderEngine } from "@isomerpages/isomer-components";
 import config from "@/data/config.json";
 import navbar from "@/data/navbar.json";
 import footer from "@/data/footer.json";
@@ -68,12 +68,6 @@ export default function Page({ schema }: any) {
 
   return (
     <>
-      <RenderMetaHead
-        // @ts-expect-error blah
-        site={config.site}
-        page={renderSchema.page}
-        HeadComponent={Head}
-      />
       <RenderEngine
         site={{
           ...config.site,
@@ -86,6 +80,7 @@ export default function Page({ schema }: any) {
         page={renderSchema.page}
         content={renderSchema.content}
         LinkComponent={Link}
+        HeadComponent={Head}
       />
     </>
   );
