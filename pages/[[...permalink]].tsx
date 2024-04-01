@@ -1,4 +1,4 @@
-import { RenderEngine } from "@isomerpages/isomer-components";
+import { IsomerPageSchema, RenderEngine } from "@isomerpages/isomer-components";
 import config from "@/data/config.json";
 import navbar from "@/data/navbar.json";
 import footer from "@/data/footer.json";
@@ -6,7 +6,11 @@ import sitemap from "@/public/sitemap.json";
 import Head from "next/head";
 import Link from "next/link";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
+import type {
+  GetStaticProps,
+  GetStaticPaths,
+  InferGetStaticPropsType,
+} from "next";
 
 function extractPermalinks(sitemap: any) {
   let result: any = [];
@@ -60,10 +64,12 @@ export const getStaticProps = (async (context) => {
   );
   return { props: { schema } };
 }) satisfies GetStaticProps<{
-  schema: any;
+  schema: IsomerPageSchema;
 }>;
 
-export default function Page({ schema }: any) {
+export default function Page({
+  schema,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const renderSchema = schema;
   const timeNow = new Date();
   const lastUpdated =
