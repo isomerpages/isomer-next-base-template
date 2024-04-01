@@ -65,6 +65,13 @@ export const getStaticProps = (async (context) => {
 
 export default function Page({ schema }: any) {
   const renderSchema = schema;
+  const timeNow = new Date();
+  const lastUpdated =
+    timeNow.getDate().toString().padStart(2, "0") +
+    " " +
+    timeNow.toLocaleString("default", { month: "short" }) +
+    " " +
+    timeNow.getFullYear();
 
   return (
     <>
@@ -76,6 +83,7 @@ export default function Page({ schema }: any) {
           navBarItems: navbar,
           // @ts-expect-error blah
           footerItems: footer,
+          lastUpdated,
         }}
         layout={renderSchema.layout}
         page={renderSchema.page}
