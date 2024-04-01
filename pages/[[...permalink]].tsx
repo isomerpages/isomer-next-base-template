@@ -77,6 +77,7 @@ export default function Page({ schema }: any) {
           // @ts-expect-error blah
           footerItems: footer,
         }}
+        layout={renderSchema.layout}
         page={renderSchema.page}
         content={renderSchema.content}
         LinkComponent={Link}
