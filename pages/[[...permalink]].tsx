@@ -52,16 +52,16 @@ export const getStaticProps = (async (context) => {
   if (permalink && permalink.length > 0 && typeof permalink !== "string") {
     const joinedPermalink = permalink.join("/");
 
-    const schema = await import(`@/schema/${joinedPermalink}.json`).then(
+    const schema = (await import(`@/schema/${joinedPermalink}.json`).then(
       (module) => module.default
-    );
+    )) as IsomerPageSchema;
 
     return { props: { schema } };
   }
 
-  const schema = await import(`@/schema/index.json`).then(
+  const schema = (await import(`@/schema/index.json`).then(
     (module) => module.default
-  );
+  )) as IsomerPageSchema;
   return { props: { schema } };
 }) satisfies GetStaticProps<{
   schema: IsomerPageSchema;
