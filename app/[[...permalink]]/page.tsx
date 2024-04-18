@@ -3,6 +3,7 @@ import {
   type IsomerSitemap,
   RenderEngine,
   getMetadata,
+  getSitemapXml,
 } from "@isomerpages/isomer-components";
 import config from "@/data/config.json";
 import navbar from "@/data/navbar.json";
@@ -24,31 +25,6 @@ const lastUpdated =
   timeNow.toLocaleString("default", { month: "short" }) +
   " " +
   timeNow.getFullYear();
-
-const extractPermalinks = (sitemap: IsomerSitemap) => {
-  let result: Array<DynamicPageProps["params"]> = [];
-
-  const traverse = (node: IsomerSitemap, path: string[] = []) => {
-    if (node.permalink) {
-      // Adding the current node's permalink to the path array
-      const newPath = path.concat(node.permalink.replace(/^\//, "").split("/"));
-      // Only add to the result if there are actual path segments
-      if (newPath.length > 0) {
-        result.push({
-          permalink: newPath,
-        });
-      }
-    }
-    // If the current node has children, recurse on each child
-    if (node.children && node.children.length > 0) {
-      node.children.forEach((child: any) => traverse(child, path));
-    }
-  };
-
-  // Start traversing from the root
-  traverse(sitemap);
-  return result;
-};
 
 const getSchema = async (
   permalink: DynamicPageProps["params"]["permalink"]
@@ -75,7 +51,9 @@ const getSchema = async (
 };
 
 export const generateStaticParams = () => {
-  return extractPermalinks(sitemap);
+  return getSitemapXml(sitemap).map(({ url }) => ({
+    permalink: url.replace(/^\//, "").split("/"),
+  }));
 };
 
 export const generateMetadata = async (
