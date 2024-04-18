@@ -1,16 +1,15 @@
+import config from "@/data/config.json";
+import footer from "@/data/footer.json";
+import navbar from "@/data/navbar.json";
+import sitemap from "@/sitemap.json";
 import {
-  type IsomerPageSchema,
-  type IsomerSitemap,
   RenderEngine,
   getMetadata,
   getSitemapXml,
+  type IsomerPageSchema,
 } from "@isomerpages/isomer-components";
-import config from "@/data/config.json";
-import navbar from "@/data/navbar.json";
-import footer from "@/data/footer.json";
-import sitemap from "@/sitemap.json";
-import Link from "next/link";
 import type { Metadata, ResolvingMetadata } from "next";
+import Link from "next/link";
 
 interface DynamicPageProps {
   params: {
