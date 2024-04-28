@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
+    "prebuild": "rm -rf .next && sh scripts/start-prebuild.sh",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
