@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "prebuild": "rm -rf .next && sh scripts/start-prebuild.sh",
+    "build:local": "rm -rf .next && curl https://raw.githubusercontent.com/isomerpages/isomer-next-build/main/scripts/preBuild.sh | bash && npm run build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
