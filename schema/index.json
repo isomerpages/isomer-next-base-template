@@ -2,6 +2,7 @@
   "version": "0.1.0",
   "layout": "homepage",
   "page": {
+    "title": "Home"
   },
   "content": [
     {
