@@ -6,8 +6,8 @@ import {
   RenderEngine,
   getMetadata,
   getSitemapXml,
-  type IsomerPageSchema,
-} from "@isomerpages/isomer-components";
+  type IsomerPageSchemaType,
+} from "@opengovsg/isomer-components";
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 
@@ -33,10 +33,10 @@ const getSchema = async (
 
     const schema = (await import(`@/schema/${joinedPermalink}.json`).then(
       (module) => module.default
-    )) as IsomerPageSchema;
+    )) as IsomerPageSchemaType;
 
     const lastModified =
-      // @ts-expect-error blah
+      // @ts-ignore
       getSitemapXml(sitemap).find(
         ({ url }) => permalink.join("/") === url.replace(/^\//, "")
       )?.lastModified || new Date().toISOString();
@@ -49,10 +49,10 @@ const getSchema = async (
 
   const schema = (await import(`@/schema/index.json`).then(
     (module) => module.default
-  )) as IsomerPageSchema;
+  )) as IsomerPageSchemaType;
 
   const lastModified =
-    // @ts-expect-error blah
+    // @ts-ignore
     getSitemapXml(sitemap).find(({ url }) => url === "/")?.lastModified ||
     new Date().toISOString();
 
@@ -63,7 +63,7 @@ const getSchema = async (
 };
 
 export const generateStaticParams = () => {
-  // @ts-expect-error blah
+  // @ts-ignore
   return getSitemapXml(sitemap).map(({ url }) => ({
     permalink: url.replace(/^\//, "").split("/"),
   }));
@@ -78,10 +78,10 @@ export const generateMetadata = async (
   schema.site = {
     ...config.site,
     environment: process.env.NEXT_PUBLIC_ISOMER_NEXT_ENVIRONMENT,
-    // @ts-expect-error blah
+    // @ts-ignore
     siteMap: sitemap,
     navBarItems: navbar,
-    // @ts-expect-error blah
+    // @ts-ignore
     footerItems: footer,
     lastUpdated,
   };
@@ -95,20 +95,17 @@ const Page = async ({ params }: DynamicPageProps) => {
   return (
     <>
       <RenderEngine
-        version={renderSchema.version}
+        {...renderSchema}
         site={{
           ...config.site,
           environment: process.env.NEXT_PUBLIC_ISOMER_NEXT_ENVIRONMENT,
-          // @ts-expect-error blah
+          // @ts-ignore
           siteMap: sitemap,
           navBarItems: navbar,
-          // @ts-expect-error blah
+          // @ts-ignore
           footerItems: footer,
           lastUpdated,
         }}
-        layout={renderSchema.layout}
-        page={renderSchema.page}
-        content={renderSchema.content}
         LinkComponent={Link}
       />
     </>

@@ -5,8 +5,8 @@ import sitemap from "@/sitemap.json";
 import {
   RenderEngine,
   getMetadata,
-  type IsomerPageSchema,
-} from "@isomerpages/isomer-components";
+  type IsomerPageSchemaType,
+} from "@opengovsg/isomer-components";
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 
@@ -28,14 +28,14 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   const schema = (await import(`@/schema/index.json`).then(
     (module) => module.default
-  )) as IsomerPageSchema;
+  )) as IsomerPageSchemaType;
   schema.site = {
     ...config.site,
     environment: process.env.NEXT_PUBLIC_ISOMER_NEXT_ENVIRONMENT,
-    // @ts-expect-error blah
+    // @ts-ignore
     siteMap: sitemap,
     navBarItems: navbar,
-    // @ts-expect-error blah
+    // @ts-ignore
     footerItems: footer,
     lastUpdated,
   };
@@ -53,10 +53,10 @@ const NotFound = () => {
         site={{
           ...config.site,
           environment: process.env.NEXT_PUBLIC_ISOMER_NEXT_ENVIRONMENT,
-          // @ts-expect-error blah
+          // @ts-ignore
           siteMap: sitemap,
           navBarItems: navbar,
-          // @ts-expect-error blah
+          // @ts-ignore
           footerItems: footer,
         }}
         layout="notfound"
