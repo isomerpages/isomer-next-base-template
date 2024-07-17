@@ -8,38 +8,43 @@
   },
   "content": [
     {
-      "type": "paragraph",
+      "type": "prose",
       "content": [
         {
-          "type": "text",
-          "text": "The "
-        },
-        {
-          "type": "text",
-          "marks": [
+          "type": "paragraph",
+          "content": [
             {
-              "type": "bold"
-            }
-          ],
-          "text": "Ministry of Trade and Industry"
-        },
-        {
-          "type": "text",
-          "text": " is one of the ministries of the "
-        },
-        {
-          "type": "text",
-          "marks": [
+              "type": "text",
+              "text": "The "
+            },
             {
-              "type": "link",
-              "href": "https://www.gov.sg"
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Ministry of Trade and Industry"
+            },
+            {
+              "type": "text",
+              "text": " is one of the ministries of the "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "link",
+                  "href": "https://www.gov.sg"
+                }
+              ],
+              "text": "Singapore Government"
+            },
+            {
+              "type": "text",
+              "text": " that works to advance Singapore's economy."
             }
-          ],
-          "text": "Singapore Government"
-        },
-        {
-          "type": "text",
-          "text": " that works to advance Singapore's economy."
+          ]
         }
       ]
     }
