@@ -19,12 +19,12 @@
             },
             {
               "type": "text",
+              "text": "Ministry of Trade and Industry",
               "marks": [
                 {
                   "type": "bold"
                 }
-              ],
-              "text": "Ministry of Trade and Industry"
+              ]
             },
             {
               "type": "text",
@@ -32,13 +32,15 @@
             },
             {
               "type": "text",
+              "text": "Singapore Government",
               "marks": [
                 {
                   "type": "link",
-                  "href": "https://www.gov.sg"
+                  "attrs": {
+                    "href": "https://www.gov.sg"
+                  }
                 }
-              ],
-              "text": "Singapore Government"
+              ]
             },
             {
               "type": "text",
