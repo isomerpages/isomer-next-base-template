@@ -1,5 +1,7 @@
 import config from "@/data/config.json";
+
 import "@/styles/globals.css";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" data-theme={config.site.theme || "isomer-next"}>
-      <body>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 };

@@ -1,15 +1,16 @@
+import type { IsomerPageSchemaType } from "@opengovsg/isomer-components";
+import type { Metadata, ResolvingMetadata } from "next";
+import Link from "next/link";
+import Script from "next/script";
 import config from "@/data/config.json";
 import footer from "@/data/footer.json";
 import navbar from "@/data/navbar.json";
 import sitemap from "@/sitemap.json";
 import {
-  RenderEngine,
   getMetadata,
   getSitemapXml,
-  type IsomerPageSchemaType,
+  RenderEngine,
 } from "@opengovsg/isomer-components";
-import type { Metadata, ResolvingMetadata } from "next";
-import Link from "next/link";
 
 interface DynamicPageProps {
   params: {
@@ -25,6 +26,9 @@ const lastUpdated =
   " " +
   timeNow.getFullYear();
 
+// NOTE: This function is slightly different from the one in the monorepo's
+// tooling/template, as we are NOT using the _index.json as the index page here
+// START OF DIFFERENCE
 const getSchema = async (
   permalink: DynamicPageProps["params"]["permalink"]
 ) => {
@@ -61,6 +65,7 @@ const getSchema = async (
 
   return schema;
 };
+// END OF DIFFERENCE
 
 export const generateStaticParams = () => {
   // @ts-ignore
@@ -84,6 +89,7 @@ export const generateMetadata = async (
     // @ts-ignore
     footerItems: footer,
     lastUpdated,
+    assetsBaseUrl: process.env.NEXT_PUBLIC_ASSETS_BASE_URL,
   };
   return getMetadata(schema);
 };
@@ -105,8 +111,10 @@ const Page = async ({ params }: DynamicPageProps) => {
           // @ts-ignore
           footerItems: footer,
           lastUpdated,
+          assetsBaseUrl: process.env.NEXT_PUBLIC_ASSETS_BASE_URL,
         }}
         LinkComponent={Link}
+        ScriptComponent={Script}
       />
     </>
   );
